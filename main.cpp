@@ -38,9 +38,10 @@ public:
 	};
 
 	void insert(unsigned int value) {
+		ref = treeHead;
 		findNear(value);
 		if (ref == NULL) {
-			ref = new node(value);
+			treeHead = ref = new node(value);
 		} else if (value < ref->value) {
 			ref->left = new node(value);
 		} else if (value > ref->value) {
@@ -49,6 +50,7 @@ public:
 	}
 
 	bool find(unsigned int value) {
+		ref = treeHead;
 		findNear(value);
 		if (ref != NULL) {
 			return false;
@@ -59,6 +61,7 @@ public:
 
 	BinTree() {
 		ref = NULL;
+		treeHead = NULL;
 	}
 
 	~BinTree() {
@@ -67,6 +70,7 @@ public:
 
 private:
 	node* ref;
+	node* treeHead;
 
 	void findNear(unsigned int value) {
 		if (ref) {
